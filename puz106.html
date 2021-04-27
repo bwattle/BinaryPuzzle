@@ -4,22 +4,24 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>v1.05 Binary Puzzle 6x6</title>
+    <title>v1.06 Binary Puzzle 6x6</title>
     <script type='text/javascript'>  
         //  21/4/21, Nev - 3 x 36 element test arrays
         var G1 = [1, null, 0, null, 0, 0, null, 1, null, 0, 0, null, null, null, null, null, null, 0, 0, null, null, 1, null, null, 1, 0, null, 1, 1, null, null, 0, null, null, 1, 1];
         var G2 = [null, 1, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
         var G3 = [null, null, 1, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
+        var G4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
 
         function loadGrid(G) {                    // load 6x6 test games
             var Row = 6;                        // declare # of rows
             var Col = 6;                        // declare # of columns
             var Grid = [];                      // declare Grid as an array
 
-            //minimising 6 loops into 2 nested loops
-            //26/4/21, Nev
-            for (let i = 0; i < Row; i++) {
-                document.getElementById('B' + (i + 1) + '1').value = G[i];            // 0*Col
+            //26/4/21, Nev - created 2 nested loops to eliminate the 6 row loops used previously
+            for (let j = 0; j < Col; j++) {
+                for (let i = 0; i < Row; i++) {
+                    document.getElementById('B' + (i + 1) + (j+1)).value = G[j*Col+i];            // 0*Col
+                }
             }
             //for (let i = 0; i < Row; i++) {
             //    document.getElementById('B' + (i + 1) + '2').value = G[Col + i];      // 1*Col
@@ -61,7 +63,7 @@
         }
     </style>
 </head>
-<body onload="loadGrid(G1)">
+<body onload="loadGrid(G4)">
     <!--  21/4/21 Now loading the variable "G1" which is a 36 element array  -->
     <form id="input">
         <h1>v1.05 Binary Puzzle Game (6x6)</h1>
