@@ -2,6 +2,8 @@
 
 Details of the puzzle are on the home page:  https://bwattle.github.io/BinaryPuzzle/
 
+Word instruction documents are at: http://techeducation.com.au/SDD/BinPuz/
+
 This trial HSC question is a good example of:
     - top down programming
     - stubs
