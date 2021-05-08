@@ -20,4 +20,4 @@ This version is 6x6, but enterprising students may want to code for variable siz
 
 Visual Studio is used as the editor with the GitHub extension so that pushing, pulling and syncing are automatic - from the "Git Changes" tab.
 
-A zip of the v1.05 solution folder can be downloaded from: 
+Zips of v1.05 & v1.08 can be downloaded from the home page at the link above. 
