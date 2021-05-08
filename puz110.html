@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>v1.09 Binary Puzzle 6x6</title>
+    <title>v1.10 Binary Puzzle 6x6</title>
         <style type="text/css">
         /* 30/7/19 Rain Holloway (2020 student) - to eliminate double lines */
         * {
@@ -51,7 +51,7 @@
             //var Row = 6;                        // declare # of rows
             //var Col = 6;                        // declare # of columns
             var GridCol = []; // array of a row, with indexes as column numbers
-            //var Grid = [];   // Clear the last grid ready for the new load
+            Grid = [];   // Clear the last grid ready for the new load
 
             // 27/4/21, Nev - pushing the 6 rows to [Grid] to create a 2D array
             for (let j = 0; j < Row; j++) { //Row loop - like the "y" coordinates
@@ -69,7 +69,7 @@
 
             document.getElementById('arrayViewCell').value = Grid[4][3]; //Row 5, Column 4 - change these so that you can see it works
 
-            displayGrid(Grid);     // 3/5/2021, Nev - Created to display the GridArray after any function
+            DisplayGrid(Grid);     // 3/5/2021, Nev - Created to display the GridArray after any function
             ////26/4/21, Nev - created 2 nested loops to display arrays above in the gameboard
             //for (let j = 0; j < Col; j++) {
             //    for (let i = 0; i < Row; i++) {
@@ -77,7 +77,7 @@
             //    }
             //}
         }
-        function displayGrid(G2D) {
+        function DisplayGrid(G2D) {
             for (let j = 0; j < Col; j++) {
                 for (let i = 0; i < Row; i++) {
                     document.getElementById('B' + (i + 1) + (j + 1)).value = G2D[j][i];            
@@ -111,7 +111,7 @@
 <body onload="loadGrid(GT)">
     <form id="input">
         <h1>Binary Puzzle Game (6x6)</h1>
-        <h2>v1.09: <span style="background: yellow; highlight: yellow">Global vs local variables - function to display grid - ERROR: Grid not wiping on load</span></h2>
+        <h2>v1.10: GLOBAL vs LOCAL variables - repaired the v1.09 error by shifting Row and Col variables to make them global.</h2>
         <p>Return to <a href="index.html">home</a>:</p>
         Choose a game to solve:<br />
         

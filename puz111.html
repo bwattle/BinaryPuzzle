@@ -4,14 +4,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>v1.09 Binary Puzzle 6x6</title>
-        <style type="text/css">
+    <title>v1.11 Binary Puzzle 6x6</title>
+        <style type="text/css">   /* Minimal CSS so as not to distract from the code */
         /* 30/7/19 Rain Holloway (2020 student) - to eliminate double lines */
         * {
             padding: 0;
             border-collapse: collapse;
         }
-
         /* 27/7/19 Nev - for formatting of the table cells */
         .gameboard {
             width: 40px;
@@ -24,6 +23,9 @@
             border-spacing: 0;
             border: 1px solid #ED2428;
         }
+            .auto-style1 {
+                width: 209px;
+            }
     </style>
     <script type='text/javascript'>  
         //  30/4/21, Nev - 15 x 36 element test arrays
@@ -48,12 +50,9 @@
         var Grid = [];   // 2D array of 6 rows (6 arrays of GridCol). Indexes will be Row, then Column
 
         function loadGrid(G) {                    // load 6x6 test games
-            //var Row = 6;                        // declare # of rows
-            //var Col = 6;                        // declare # of columns
-            var GridCol = []; // array of a row, with indexes as column numbers
-            //var Grid = [];   // Clear the last grid ready for the new load
-
             // 27/4/21, Nev - pushing the 6 rows to [Grid] to create a 2D array
+            var GridCol = []; // temporary array of a row, with indexes as column numbers - only used to load the 1D arrays above
+            Grid = [];   // Clear the last grid ready for the new load
             for (let j = 0; j < Row; j++) { //Row loop - like the "y" coordinates
                 for (let i = 0; i < Col; i++) { //Column loop - like the "x" coordinates
                     GridCol.push(G[j * Col + i]); // 27/4/21, Nev - load the column elements into this temporary array
@@ -61,23 +60,13 @@
                 Grid.push(GridCol); //  27/4/21, Nev - push a column array for each row
                 GridCol = []; // 27/4/21, Nev - clear this array ready for the next row
             }
-
             document.getElementById('arrayView1D').value = Grid; // 26/4/21, Nev - this works, but it just looks like a 1D array!
-
             document.getElementById('arrayView2D').value = '[' + Grid[0] + ']\n[' + Grid[1] + ']\n[' + Grid[2] +
                 ']\n[' + Grid[3] + ']\n[' + Grid[4] + ']\n[' + Grid[5] + ']'; // 27/4/21, Nev - formatting the array Grid as an array of 6 row arrays
-
             document.getElementById('arrayViewCell').value = Grid[4][3]; //Row 5, Column 4 - change these so that you can see it works
-
-            displayGrid(Grid);     // 3/5/2021, Nev - Created to display the GridArray after any function
-            ////26/4/21, Nev - created 2 nested loops to display arrays above in the gameboard
-            //for (let j = 0; j < Col; j++) {
-            //    for (let i = 0; i < Row; i++) {
-            //        document.getElementById('B' + (i + 1) + (j+1)).value = G[j*Col+i];            // 0*Col
-            //    }
-            //}
+            DisplayGrid(Grid);     // 3/5/2021, Nev - Created to display the GridArray after any function
         }
-        function displayGrid(G2D) {
+        function DisplayGrid(G2D) {
             for (let j = 0; j < Col; j++) {
                 for (let i = 0; i < Row; i++) {
                     document.getElementById('B' + (i + 1) + (j + 1)).value = G2D[j][i];            
@@ -94,7 +83,22 @@
             window.alert('SolveNumberPairs has not been coded yet');
         }
         function SolveRowPairs() { // See pseudocode in Q22f for the row part here
-            window.alert('SolveRowPairs has not been coded yet');
+            //  7/5/21 Nev, as in psuedo below - adds the opposite number to either side of a row pair
+            var GridSize = 6;
+            for (let Row = 0; Row < GridSize; Row++) { // 0 - 5 does the bottom row
+                for (let Col = 0; Col < GridSize - 1; Col++) { //0 - 4 is enough to find a 4-5 pair
+                    if (Grid[Row][Col] !== null && Grid[Row][Col] == Grid[Row][Col + 1]) {
+                        if (Col > 0) { // is there a space to the left?
+                            Grid[Row][Col - 1] = (1 - Grid[Row][Col]); // inserts to the left of the pair
+                        }
+                        if (Col < GridSize - 2) { // is there a space to the right?
+                            Grid[Row][Col + 2] = (1 - Grid[Row][Col]); // inserts to the right of the pair
+                        }
+                    }
+                }
+            }
+            document.getElementById('arrayView2D').value = Grid;
+            DisplayGrid(Grid); // send the updated grid to the screen
         }
         function SolveColPairs() { // Similar to column pairs
             window.alert('SolveColPairs has not been coded yet');
@@ -108,18 +112,18 @@
 
     </script>
 </head>
-<body onload="loadGrid(GT)">
+<body onload="loadGrid(G01)">
     <form id="input">
         <h1>Binary Puzzle Game (6x6)</h1>
-        <h2>v1.09: <span style="background: yellow; highlight: yellow">Global vs local variables - function to display grid - ERROR: Grid not wiping on load</span></h2>
-        <p>Return to <a href="index.html">home</a>:</p>
-        Choose a game to solve:<br />
-        
-        <select id="cboPuzNo" onchange="loadGrid(eval(value))">
+        <h2>v1.11: &quot;RowPairs&quot; module has been converted from the pseudocode below into JavaScript and functions on the button press.</h2>
+        The question driving this puzzle can seen on the <a href="index.html" target="_blank"><span style="font-size: 18.0pt; background: yellow; mso-highlight: yellow">home</span></a> page.<br />
+        <br />
+        Choose a game to be solved:<br />
+<!--  3/8/19 Board cell labels have "B" for board, then column digit, then row digit"  -->
+        <select id="cboPuzNo" onchange="loadGrid(eval(value))" class="auto-style1" name="D1">
                     <!--<select id="cboPuzNo" onchange="LoadGrid(eval(value))">-->
             <!--<select id="cboPuzNo">-->
-            <option value="GT">Test 1-36</option>
-            <option value='G01'>Example in Q</option>
+            <option value='G01'>Game 1 (given in Question)</option>
             <option value="G02">Game 2</option>
             <option value="G03">Game 3</option>
             <option value="G04">Game 4</option>
@@ -132,12 +136,9 @@
             <option value="G11">Game 11</option>
             <option value="G12">Game 12</option>
             <option value="G13">Game 13</option>
-        </select>
-
-        <!--  3/8/19 Board cell labels have "B" for board, then column digit, then row digit"  -->
-        <br />
-        The buttons here form a test bed similar to the structure chart.
-        <br />
+            <option value="GT">1-36 for testing</option>
+        </select><br />
+        The buttons here form a test bed in a similar layout to the structure chart. <br />
         Later, we can improve the screen design.<br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
         <input type="button" value="--- Solve repeat ---" onclick="BinaryPuzzleSolver()" />&nbsp;&nbsp;&nbsp;<br />
