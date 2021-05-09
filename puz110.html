@@ -61,21 +61,14 @@
                 Grid.push(GridCol); //  27/4/21, Nev - push a column array for each row
                 GridCol = []; // 27/4/21, Nev - clear this array ready for the next row
             }
-
-            document.getElementById('arrayView1D').value = Grid; // 26/4/21, Nev - this works, but it just looks like a 1D array!
-
-            document.getElementById('arrayView2D').value = '[' + Grid[0] + ']\n[' + Grid[1] + ']\n[' + Grid[2] +
-                ']\n[' + Grid[3] + ']\n[' + Grid[4] + ']\n[' + Grid[5] + ']'; // 27/4/21, Nev - formatting the array Grid as an array of 6 row arrays
-
-            document.getElementById('arrayViewCell').value = Grid[4][3]; //Row 5, Column 4 - change these so that you can see it works
-
             DisplayGrid(Grid);     // 3/5/2021, Nev - Created to display the GridArray after any function
-            ////26/4/21, Nev - created 2 nested loops to display arrays above in the gameboard
-            //for (let j = 0; j < Col; j++) {
-            //    for (let i = 0; i < Row; i++) {
-            //        document.getElementById('B' + (i + 1) + (j+1)).value = G[j*Col+i];            // 0*Col
-            //    }
-            //}
+            //9/5/21, Nev - Shifted the next lines to "DisplayGrid"
+            //document.getElementById('arrayView1D').value = Grid; // 26/4/21, Nev - this works, but it just looks like a 1D array!
+
+            //document.getElementById('arrayView2D').value = '[' + Grid[0] + ']\n[' + Grid[1] + ']\n[' + Grid[2] +
+            //    ']\n[' + Grid[3] + ']\n[' + Grid[4] + ']\n[' + Grid[5] + ']'; // 27/4/21, Nev - formatting the array Grid as an array of 6 row arrays
+
+            //document.getElementById('arrayViewCell').value = Grid[4][3]; //Row 5, Column 4 - change these so that you can see it works
         }
         function DisplayGrid(G2D) {
             for (let j = 0; j < Col; j++) {
@@ -83,6 +76,13 @@
                     document.getElementById('B' + (i + 1) + (j + 1)).value = G2D[j][i];            
                 }
             }
+            //9/5/21, Nev - Shifted the next lines from "LoadGrid"
+            document.getElementById('arrayView1D').value = Grid; // 26/4/21, Nev - this works, but it just looks like a 1D array!
+
+            document.getElementById('arrayView2D').value = '[' + Grid[0] + ']\n[' + Grid[1] + ']\n[' + Grid[2] +
+                ']\n[' + Grid[3] + ']\n[' + Grid[4] + ']\n[' + Grid[5] + ']'; // 27/4/21, Nev - formatting the array Grid as an array of 6 row arrays
+
+            document.getElementById('arrayViewCell').value = Grid[4][3]; //Row 5, Column 4 - change these so that you can see it works
         }
         function BinaryPuzzleSolver() {  //Code the top level module here
             window.alert('BinaryPuzzleSolver has not been coded yet');
